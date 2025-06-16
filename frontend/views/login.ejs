@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ProjetoX</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/alert') %>
+
+    <div class="background-image-container">
+        <main class="container login-container">
+            <div class="form-container">
+                <h1>Login</h1>
+                
+                <form id="loginForm" class="form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userType">Tipo de Usuário</label>
+                        <select id="userType" name="userType" required>
+                            <option value="user">Buscando Serviço</option>
+                            <option value="company">Empresa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions" style="display: flex; gap: 10px;">
+                        <button type="submit" class="form-submit-btn">Entrar</button>
+                        <a href="/auth/register" class="form-submit-btn btn-secondary">Cadastrar</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Mostrar loader
+            showLoader();
+            
+            try {
+                const formData = new FormData(this);
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('Sucesso!', data.message || 'Login realizado com sucesso', 'success');
+                    setTimeout(() => {
+                        window.location.href = data.redirect || '/';
+                    }, 2000);
+                } else {
+                    showAlert('Erro no Login', data.message || 'Erro ao fazer login', 'error');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showAlert('Erro no Sistema', 'Erro ao processar o login', 'error');
+            } finally {
+                hideLoader();
+            }
+        });
+    </script>
+
+    <%- include('partials/footer') %>
+</body>
+</html> 

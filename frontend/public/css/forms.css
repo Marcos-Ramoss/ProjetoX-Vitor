@@ -1,0 +1,25 @@
+/* Ajustes específicos para o formulário de login/registro */
+.form-container h1,
+.form-container h2 {
+  /* Removido ou revertido para estilos padrão */
+}
+
+.form-container .btn-secondary {
+  /* Removido ou revertido para estilos padrão */
+}
+
+.form-container .btn-secondary:hover {
+  /* Removido ou revertido para estilos padrão */
+}
+
+.form-container .form-check-input {
+  /* Removido ou revertido para estilos padrão */
+}
+
+.form-container .form-check-input:checked {
+  /* Removido ou revertido para estilos padrão */
+}
+
+.form-container .form-check-label {
+  /* Removido ou revertido para estilos padrão */
+} 
