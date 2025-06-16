@@ -92,52 +92,6 @@
   <!-- Elemento invisível para trigger de hover da navbar -->
   <div class="navbar-hover-trigger"></div>
 
-  <script>
-    const navbar = document.querySelector('.navbar');
-    const navbarHoverTrigger = document.querySelector('.navbar-hover-trigger');
-    const isHomePage = window.location.pathname === '/';
-
-    if (isHomePage) {
-      // Na página inicial: Visível por padrão, esconde no scroll down, mostra no scroll up
-      let lastScrollTop = 0;
-
-      window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (currentScroll > lastScrollTop && currentScroll > navbar.offsetHeight) {
-          navbar.classList.add('navbar-hidden');
-        } else if (currentScroll < lastScrollTop) {
-          navbar.classList.remove('navbar-hidden');
-        }
-
-        lastScrollTop = currentScroll;
-      });
-
-      // Remover quaisquer estilos de ocultação iniciais aplicados pelo CSS global se estiver na home
-      navbar.classList.remove('navbar-hidden');
-
-    } else {
-      // Em outras páginas: Oculta por padrão, mostra apenas no hover
-      navbar.classList.add('navbar-hidden'); // Garante que comece oculta
-
-      window.removeEventListener('scroll', function() {}); // Remove qualquer listener de scroll
-
-      navbarHoverTrigger.addEventListener('mouseenter', function() {
-        navbar.classList.remove('navbar-hidden');
-      });
-
-      navbarHoverTrigger.addEventListener('mouseleave', function() {
-        navbar.classList.add('navbar-hidden');
-      });
-
-      navbar.addEventListener('mouseenter', function() {
-          navbar.classList.remove('navbar-hidden');
-      });
-
-      navbar.addEventListener('mouseleave', function() {
-          navbar.classList.add('navbar-hidden');
-      });
-    }
-  </script>
+  <script src="/js/navbar.js"></script>
 
   <main>

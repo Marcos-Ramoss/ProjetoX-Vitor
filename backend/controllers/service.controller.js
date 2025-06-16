@@ -79,6 +79,7 @@ exports.postCreateService = async (req, res) => {
         });
 
         // Se houver upload de imagem
+        console.log('Arquivo recebido:', req.file);
         if (req.file) {
             service.imageUrl = '/uploads/images/' + req.file.filename;
         }

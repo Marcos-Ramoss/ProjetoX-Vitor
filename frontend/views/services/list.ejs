@@ -108,24 +108,26 @@
               'X-Requested-With': 'XMLHttpRequest'
             }
           });
-          
-          const data = await response.json();
-          
-          if (data.success) {
-            // Fechar o modal
-            modal.hide();
-            
-            // Remover o card do serviço da página
-            const serviceCard = document.querySelector(`.col:has([data-bs-target="#deleteModal${serviceId}"])`);
-            serviceCard.remove();
-            
-            // Se não houver mais serviços, mostrar a mensagem de nenhum serviço
-            const servicesContainer = document.querySelector('.row.row-cols-1');
-            if (servicesContainer && servicesContainer.children.length === 0) {
-              location.reload(); // Recarregar para mostrar a mensagem
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+              // Fechar o modal
+              modal.hide();
+              // Remover o card do serviço da página
+              const serviceCard = document.querySelector(`.col:has([data-bs-target="#deleteModal${serviceId}"])`);
+              serviceCard.remove();
+              // Se não houver mais serviços, mostrar a mensagem de nenhum serviço
+              const servicesContainer = document.querySelector('.row.row-cols-1');
+              if (servicesContainer && servicesContainer.children.length === 0) {
+                location.reload();
+              }
+            } else {
+              alert('Erro ao excluir serviço: ' + (data.message || 'Erro desconhecido'));
             }
           } else {
-            alert('Erro ao excluir serviço: ' + (data.message || 'Erro desconhecido'));
+            const errorText = await response.text();
+            alert('Erro ao excluir serviço: ' + errorText);
           }
         } catch (error) {
           console.error('Erro:', error);

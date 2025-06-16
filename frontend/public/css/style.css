@@ -15,6 +15,8 @@
     --button-danger: #e74c3c;
 }
 
+
+
 /* Reset e estilos base */
 * {
     margin: 0;
@@ -412,3 +414,8 @@ footer {
 .service-location {
   color: #fff; /* Define a cor do texto para branco */
 }
+
+.main-navbar-visible {
+    padding-top: 80px; /* ajuste conforme a altura real da navbar */
+}
+

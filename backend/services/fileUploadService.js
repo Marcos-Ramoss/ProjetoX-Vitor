@@ -30,6 +30,8 @@ class FileUploadService {
       const absolutePath = path.join(
         __dirname,
         '..',
+        '..',
+        'frontend',
         'public',
         'uploads',
         cleanPath
