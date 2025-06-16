@@ -15,8 +15,8 @@
         <!-- HERO SECTION -->
         <section class="hero-section">
             <!-- Imagem de fundo será adicionada via CSS ::before -->
+            <% if (!user) { %>
               <div class="form-container">
-                <% if (!user) { %>
                 <form class="form" method="POST" action="/auth/login" id="loginForm">
                   <div class="form-group">
                     <label for="email">Email</label>

@@ -134,13 +134,13 @@ exports.postRegister = async (req, res) => {
     const user = new Model(userData);
     await user.save();
 
-    // Criar sessão após registro (opcional, dependendo do fluxo)
-    // req.session.user = {
-    //   id: user._id,
-    //   name: user.name,
-    //   email: user.email,
-    //   type: userType
-    // };
+    // Criar sessão após registro
+    req.session.user = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      type: userType
+    };
 
     // Em vez de redirecionar, retornar sucesso JSON
     res.status(201).json({ message: 'Cadastro realizado com sucesso' });
